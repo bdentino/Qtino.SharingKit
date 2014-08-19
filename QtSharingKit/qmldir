@@ -1,0 +1,4 @@
+module Qtino.SharingKit
+plugin SharingKit
+classname QtSharingKitPlugin
+typeinfo plugins.qmltypes

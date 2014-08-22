@@ -10,14 +10,22 @@ latest_version = 1.0
 # Input
 SOURCES += \
     FBAppCredentials.cpp \
-    QtSharingKitPlugin.cpp
+    QtSharingKitPlugin.cpp \
+    FacebookContent.cpp \
+    MicroblogContent.cpp \
+    SmsContent.cpp \
+    EmailContent.cpp
 
 HEADERS += \
     FBAppCredentials.h \
     QtSharingKitPlugin.h \
-    QtSharingKitApi.h
+    QtSharingKitApi.h \
+    FacebookContent.h \
+    MicroblogContent.h \
+    SmsContent.h \
+    EmailContent.h
 
-OTHER_FILES = qmldir
+OTHER_FILES = qmldir QtSharingKit.pri
 
 ios {
     CONFIG += static

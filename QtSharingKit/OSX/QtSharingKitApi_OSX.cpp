@@ -24,6 +24,6 @@ void QtSharingKitApi::setFacebookAppCredentials(FBAppCredentials* credentials)
     emit facebookAppCredentialsChanged();
 }
 
-void QtSharingKitApi::openShareSheetForContent()
+void QtSharingKitApi::launchShareActivity()
 {
 }

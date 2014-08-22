@@ -14,6 +14,7 @@ class QtSharingKitApi : public QQuickItem
 
     Q_PROPERTY(FBAppCredentials* facebookAppCredentials READ facebookAppCredentials
                WRITE setFacebookAppCredentials NOTIFY facebookAppCredentialsChanged)
+    Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
 
 public:
     QtSharingKitApi(QQuickItem* parent = 0);
@@ -22,14 +23,23 @@ public:
     FBAppCredentials* facebookAppCredentials();
     void setFacebookAppCredentials(FBAppCredentials* credentials);
 
+    QString title() { return m_title; }
+    void setTitle(QString title) {
+        if (m_title == title) return;
+        m_title = title;
+        emit titleChanged();
+    }
+
 signals:
     void facebookAppCredentialsChanged();
+    void titleChanged();
 
 public slots:
-    void openShareSheetForContent(QString title, QString blurb, QString text);
+    void launchShareActivity();
 
 private:
     FBAppCredentials* m_fbCredentials;
+    QString m_title;
     QtSharingKitPrivate* m_privateData;
 };
 

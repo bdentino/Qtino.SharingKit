@@ -3,6 +3,7 @@ import QtQuick.Window 2.1
 import Qtino.SharingKit 1.0
 
 Window {
+    id: root
     visible: true
     width: 360
     height: 360
@@ -11,9 +12,7 @@ Window {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            sharingView.openShareSheetForContent("Share Your Score!",
-                                                 "Beat My Bluu Score (1200)",
-                                                 "Just scored 1200 in #Bluu. Bet you can't beat it!");
+            sharingView.launchShareActivity()
         }
     }
 
@@ -27,10 +26,36 @@ Window {
 
         FacebookAppCredentials {
             id: fbCreds
-            appName: "Bluu"
-            appID: "620462718052834"
+            appName: "QtSharingDemo"
+            appID: "771432599569387"
+        }
+        facebookAppCredentials: fbCreds
+        title: "Share Something!"
+
+        FacebookContent {
+            id: fbContentItem
+            text: "Facebook sharing is alright, (as long as it's open source)..."
+            link: "https://github.com/bdentino/QtSharingKit"
+            attachScreenshot: true
         }
 
-        facebookAppCredentials: fbCreds
+        MicroblogContent {
+            id: mbContentItem
+            text: "Tweeting from Qml! Check out this library for #sharing on mobile - https://github.com/bdentino/QtSharingKit."
+            attachScreenshot: true
+        }
+
+        EmailContent {
+            id: emailContentItem
+            subject: "I can share via email!"
+            body: "This is just another email test."
+            attachScreenshot: true
+        }
+
+        SmsContent {
+            id: smsContentItem
+            body: "Lets see, who can I text this to without annoying too much..."
+            attachScreenshot: true
+        }
     }
 }

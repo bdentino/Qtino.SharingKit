@@ -4,6 +4,7 @@
 *.lo
 *.o
 *.a
+!libOvershareKit.a
 *.la
 *.lai
 *.so

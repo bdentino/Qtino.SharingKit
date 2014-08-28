@@ -12,6 +12,7 @@
 #include "OSKShareableContentItem.h"
 #include "OSKPresentationManager.h"
 #include "OSKActivitiesManager.h"
+#include "OSKLinkShorteningUtility.h"
 
 #include <UIKit/UIKit.h>
 #include <UIKit/UIImage.h>

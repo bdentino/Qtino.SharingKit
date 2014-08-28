@@ -6,6 +6,7 @@
 #include "MicroblogContent.h"
 #include "SmsContent.h"
 #include "EmailContent.h"
+#include "UrlShortener.h"
 
 #include <qqml.h>
 
@@ -18,6 +19,7 @@ void QtSharingKitPlugin::registerTypes(const char *uri)
     qmlRegisterType<MicroblogContent>(uri, 1, 0, "MicroblogContent");
     qmlRegisterType<SmsContent>(uri, 1, 0, "SmsContent");
     qmlRegisterType<EmailContent>(uri, 1, 0, "EmailContent");
+    qmlRegisterType<UrlShortener>(uri, 1, 0, "UrlShortener");
 }
 
 

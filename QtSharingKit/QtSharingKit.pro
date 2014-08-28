@@ -23,7 +23,8 @@ HEADERS += \
     FacebookContent.h \
     MicroblogContent.h \
     SmsContent.h \
-    EmailContent.h
+    EmailContent.h \
+    UrlShortener.h
 
 OTHER_FILES = qmldir QtSharingKit.pri
 
@@ -36,7 +37,8 @@ ios {
     OBJECTIVE_SOURCES += \
                          iOS/QtSharingOSKCustomizations.mm \
                          iOS/QtSharingViewController.mm \
-                         iOS/QtSharingKitApi_iOS.mm
+                         iOS/QtSharingKitApi_iOS.mm \
+                         iOS/UrlShortener.mm
 
     INCLUDEPATH += $$PWD/iOS/Dependencies/OvershareKit \
                    $$PWD/iOS/Dependencies/OvershareKit/OvershareKit
@@ -53,6 +55,7 @@ ios {
 macx {
     SOURCES += \
                OSX/QtSharingKitApi_OSX.cpp
+               OSX/UrlShortener.cpp
 }
 
 

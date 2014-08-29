@@ -48,6 +48,7 @@ ios {
 
     QMAKE_LFLAGS += -ObjC
 
+    ##TODO: Make Overshare-Kit a submodule and integrate source + build process
     QMAKE_POST_LINK += "libtool -static -o lib$${TARGET}.a lib$${TARGET}.a $$PWD/iOS/Dependencies/OvershareKit/libOvershareKit.a;"
     QMAKE_CXXFLAGS += -fmodules
 }

@@ -38,7 +38,6 @@ ios {
     for(file, pngs) {
         bundleRes.files += $$file
     }
-    message($$bundleRes.files)
     QMAKE_BUNDLE_DATA += bundleRes
 
     googleBundle.files = $$PWD/../../QtSharingKit/iOS/Dependencies/Google/GooglePlus.bundle

@@ -8,6 +8,16 @@ import QtQuick.tooling 1.1
 
 Module {
     Component {
+        name: "EmailContent"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["EmailContent 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "subject"; type: "string" }
+        Property { name: "body"; type: "string" }
+        Property { name: "attachScreenshot"; type: "bool" }
+    }
+    Component {
         name: "FBAppCredentials"
         prototype: "QObject"
         exports: ["FacebookAppCredentials 1.0"]
@@ -16,12 +26,51 @@ Module {
         Property { name: "appID"; type: "string" }
     }
     Component {
+        name: "FacebookContent"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["FacebookContent 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "text"; type: "string" }
+        Property { name: "link"; type: "QUrl" }
+        Property { name: "attachScreenshot"; type: "bool" }
+    }
+    Component {
+        name: "MicroblogContent"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["MicroblogContent 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "text"; type: "string" }
+        Property { name: "attachScreenshot"; type: "bool" }
+    }
+    Component {
         name: "QtSharingKitApi"
         defaultProperty: "data"
         prototype: "QQuickItem"
         exports: ["SharingKitView 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "facebookAppCredentials"; type: "FBAppCredentials"; isPointer: true }
-        Method { name: "openShareSheetForContent" }
+        Property { name: "title"; type: "string" }
+        Method { name: "launchShareActivity" }
+    }
+    Component {
+        name: "SmsContent"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["SmsContent 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "body"; type: "string" }
+        Property { name: "attachScreenshot"; type: "bool" }
+    }
+    Component {
+        name: "UrlShortener"
+        defaultProperty: "data"
+        prototype: "QQuickItem"
+        exports: ["UrlShortener 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "ready"; type: "bool"; isReadonly: true }
+        Property { name: "shortUrl"; type: "QUrl"; isReadonly: true }
+        Property { name: "longUrl"; type: "QUrl" }
     }
 }

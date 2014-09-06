@@ -44,18 +44,24 @@ ios {
                    $$PWD/iOS/Dependencies/OvershareKit/OvershareKit
 
     LIBS += -L$$PWD/iOS/Dependencies/OvershareKit
-    LIBS += -lOvershareKit
+    LIBS += -l$$qtLibraryTarget(OvershareKit)
 
     QMAKE_LFLAGS += -ObjC
 
     ##TODO: Make Overshare-Kit a submodule and integrate source + build process
-    QMAKE_POST_LINK += "libtool -static -o lib$${TARGET}.a lib$${TARGET}.a $$PWD/iOS/Dependencies/OvershareKit/libOvershareKit.a;"
+    !iphonesimulator {
+        QMAKE_POST_LINK += "libtool -static -o lib$${TARGET}.a lib$${TARGET}.a $$PWD/iOS/Dependencies/OvershareKit/libOvershareKit.a;"
+    }
+    iphonesimulator {
+        QMAKE_POST_LINK += "libtool -static -o lib$${TARGET}.a lib$${TARGET}.a $$PWD/iOS/Dependencies/OvershareKit/libOvershareKit_iphonesimulator.a;"
+    }
+
     QMAKE_CXXFLAGS += -fmodules
 }
 
 macx {
     SOURCES += \
-               OSX/QtSharingKitApi_OSX.cpp
+               OSX/QtSharingKitApi_OSX.cpp \
                OSX/UrlShortener.cpp
 }
 

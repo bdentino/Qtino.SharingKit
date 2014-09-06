@@ -10,7 +10,7 @@ RESOURCES += qml.qrc
 QML_IMPORT_PATH =
 
 ios {
-    QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
+    QMAKE_IOS_DEPLOYMENT_TARGET = 6.0
 
     LIBS += -framework CoreMotion \
             -framework CoreLocation \

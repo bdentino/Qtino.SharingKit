@@ -4,7 +4,7 @@
 *.lo
 *.o
 *.a
-!libOvershareKit.a
+!libOvershareKit*
 *.la
 *.lai
 *.so

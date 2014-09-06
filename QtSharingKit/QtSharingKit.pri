@@ -2,23 +2,23 @@
 ios {
     QTSHARINGKIT_HOME = $$PWD
 
-    QMAKE_IOS_DEPLOYMENT_TARGET = 7.0
+    QMAKE_IOS_DEPLOYMENT_TARGET = 6.0
 
-    LIBS += -framework CoreMotion \
-            -framework CoreLocation \
-            -framework AddressBook \
-            -framework Social \
-            -framework SystemConfiguration \
-            -framework Accounts \
-            -framework MessageUI \
-            -framework Security \
-            -framework SafariServices \
-            -framework StoreKit \
-            -framework MediaPlayer
+    LIBS += -weak_framework CoreMotion \
+            -weak_framework CoreLocation \
+            -weak_framework AddressBook \
+            -weak_framework Social \
+            -weak_framework SystemConfiguration \
+            -weak_framework Accounts \
+            -weak_framework MessageUI \
+            -weak_framework Security \
+            -weak_framework SafariServices \
+            -weak_framework StoreKit \
+            -weak_framework MediaPlayer
 
     QMAKE_LFLAGS += -F$${QTSHARINGKIT_HOME}/iOS/Dependencies/Google -ObjC
-    LIBS += -framework GooglePlus \
-            -framework GoogleOpenSource
+    LIBS += -weak_framework GooglePlus \
+            -weak_framework GoogleOpenSource
 
     OTHER_FILES += $${QTSHARINGKIT_HOME}/iOS/Dependencies/OvershareKit/Resources/*
 

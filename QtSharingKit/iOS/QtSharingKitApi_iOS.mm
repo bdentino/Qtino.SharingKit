@@ -167,6 +167,19 @@ void QtSharingKitApi::launchShareActivity()
                                                  presentingViewController:qtController
                                                  options:options];
     }
+    else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        NSDictionary *options = @{};
+        QPointF point = this->mapToScene(QPointF(0, 0));
+        CGRect rect = CGRectMake(point.x(), point.y(), width(), height());
+        [[OSKPresentationManager sharedInstance] presentActivitySheetForContent:content
+                                                 presentingViewController:qtController
+                                                 popoverFromRect:rect
+                                                 inView:qtController.view
+                                                 permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                 animated:YES
+                                                 options:options];
+    }
 }
 
 UIImage* screenshot()
@@ -207,5 +220,6 @@ UIImage* screenshot()
 
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    qDebug() << "Finished screen capture";
     return image;
 }

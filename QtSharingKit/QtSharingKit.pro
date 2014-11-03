@@ -1,3 +1,12 @@
+# Include Environment-Specific Definitions File.
+# Must include the following variables:
+#   FACEBOOKSDK_HOME_IOS = xxx
+# This file is not included in git. You need
+# to create it locally in $$PWD before you can build.
+
+PRE_TARGETDEPS += $$PWD/QtSharingKitBuildEnv.pri
+include($$PWD/QtSharingKitBuildEnv.pri)
+
 TEMPLATE = lib
 TARGET = SharingKit
 
@@ -74,8 +83,8 @@ ios {
                          iOS/QtSharingSwizzle.mm \
                          iOS/QtSharingActivityViewController.mm
 
-    INCLUDEPATH += /Users/bdentino/FacebookSDK/iOS/FacebookSDK.framework/Headers
-    LIBS += -F/Users/bdentino/FacebookSDK/iOS
+    INCLUDEPATH += $${FACEBOOKSDK_HOME_IOS}/FacebookSDK.framework/Headers
+    LIBS += -F$${FACEBOOKSDK_HOME_IOS}
     LIBS += -framework FacebookSDK
 
     LIBS += -ObjC

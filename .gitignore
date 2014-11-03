@@ -1,3 +1,5 @@
+QtSharingKitBuildEnv.pri
+
 # C++ objects and libs
 
 *.slo

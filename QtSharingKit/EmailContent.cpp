@@ -1,7 +1,7 @@
 #include "EmailContent.h"
 
-EmailContent::EmailContent(QQuickItem* parent)
-    : QQuickItem(parent)
+EmailContent::EmailContent(QObject* parent)
+    : DefaultContent(parent)
 {
 }
 

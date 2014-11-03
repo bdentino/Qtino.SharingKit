@@ -1,7 +1,7 @@
 #include "SmsContent.h"
 
-SmsContent::SmsContent(QQuickItem* parent)
-    : QQuickItem(parent)
+SmsContent::SmsContent(QObject* parent)
+    : DefaultContent(parent)
 {
 }
 

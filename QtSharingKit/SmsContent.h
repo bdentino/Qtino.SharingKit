@@ -1,9 +1,11 @@
 #ifndef SMSCONTENT_H
 #define SMSCONTENT_H
 
-#include <QQuickItem>
+#include <QObject>
 
-class SmsContent : public QQuickItem
+#include "DefaultContent.h"
+
+class SmsContent : public DefaultContent
 {
     Q_OBJECT
 
@@ -12,7 +14,7 @@ class SmsContent : public QQuickItem
                WRITE setAttachScreenshot NOTIFY attachScreenshotChanged)
 
 public:
-    SmsContent(QQuickItem* parent = 0);
+    SmsContent(QObject* parent = 0);
 
     QString body();
     void setBody(QString body);

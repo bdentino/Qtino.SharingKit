@@ -2,5 +2,6 @@ TEMPLATE = subdirs
 
 CONFIG += ordered
 
-SUBDIRS += QtSharingKit \
-           Examples/QtSharingDemo
+SUBDIRS += QtSharingKit
+#android { SUBDIRS += QtSharingKit/Android/jar }
+SUBDIRS += Examples/QtSharingDemo

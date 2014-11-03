@@ -3,25 +3,24 @@
 
 #include <QQuickItem>
 
+#ifdef QT_BUILD_SHARING_LIB
+#define Q_SHARING_EXPORT Q_DECL_EXPORT
+#else
+#define Q_SHARING_EXPORT Q_DECL_IMPORT
+#endif
+
 class FBAppCredentials;
-//TODO: Abstract out OS-generic stuff so that we don't have to re-implement it
-//      for each backend implementation
 struct QtSharingKitPrivate;
 
 class QtSharingKitApi : public QQuickItem
 {
     Q_OBJECT
 
-    Q_PROPERTY(FBAppCredentials* facebookAppCredentials READ facebookAppCredentials
-               WRITE setFacebookAppCredentials NOTIFY facebookAppCredentialsChanged)
     Q_PROPERTY(QString title READ title WRITE setTitle NOTIFY titleChanged)
 
 public:
     QtSharingKitApi(QQuickItem* parent = 0);
     ~QtSharingKitApi();
-
-    FBAppCredentials* facebookAppCredentials();
-    void setFacebookAppCredentials(FBAppCredentials* credentials);
 
     QString title() { return m_title; }
     void setTitle(QString title) {
@@ -31,14 +30,13 @@ public:
     }
 
 signals:
-    void facebookAppCredentialsChanged();
     void titleChanged();
+    void sharingFinished();
 
 public slots:
     void launchShareActivity();
 
 private:
-    FBAppCredentials* m_fbCredentials;
     QString m_title;
     QtSharingKitPrivate* m_privateData;
 };

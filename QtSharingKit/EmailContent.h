@@ -1,9 +1,10 @@
 #ifndef EMAILCONTENT_H
 #define EMAILCONTENT_H
 
-#include <QQuickItem>
+#include <QObject>
+#include "DefaultContent.h"
 
-class EmailContent : public QQuickItem
+class EmailContent : public DefaultContent
 {
     Q_OBJECT
 
@@ -13,7 +14,7 @@ class EmailContent : public QQuickItem
                NOTIFY attachScreenshotChanged)
 
 public:
-    EmailContent(QQuickItem* parent = 0);
+    EmailContent(QObject* parent = 0);
 
     QString subject();
     void setSubject(QString subject);

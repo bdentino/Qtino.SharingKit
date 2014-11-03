@@ -1,7 +1,8 @@
 #include "FacebookContent.h"
 
-FacebookContent::FacebookContent(QQuickItem* parent)
-    : QQuickItem(parent)
+FacebookContent::FacebookContent(QObject* parent)
+    : DefaultContent(parent),
+      m_fbCredentials(NULL)
 {
 }
 
@@ -39,4 +40,16 @@ void FacebookContent::setAttachScreenshot(bool attach)
     if (m_attachScreenshot == attach) return;
     m_attachScreenshot = attach;
     emit attachScreenshotChanged();
+}
+
+FBAppCredentials* FacebookContent::appCredentials()
+{
+    return m_fbCredentials;
+}
+
+void FacebookContent::setAppCredentials(FBAppCredentials* credentials)
+{
+    if (m_fbCredentials == credentials) return;
+    m_fbCredentials = credentials;
+    emit appCredentialsChanged();
 }

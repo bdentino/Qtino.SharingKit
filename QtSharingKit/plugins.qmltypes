@@ -8,9 +8,18 @@ import QtQuick.tooling 1.1
 
 Module {
     Component {
+        name: "DefaultContent"
+        defaultProperty: "qmlAttachments"
+        prototype: "QObject"
+        exports: ["DefaultContent 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "qmlAttachments"; type: "ShareableItem"; isList: true; isReadonly: true }
+        Property { name: "attachments"; type: "QList<ShareableItem*>"; isReadonly: true }
+    }
+    Component {
         name: "EmailContent"
-        defaultProperty: "data"
-        prototype: "QQuickItem"
+        defaultProperty: "qmlAttachments"
+        prototype: "DefaultContent"
         exports: ["EmailContent 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "subject"; type: "string" }
@@ -27,22 +36,94 @@ Module {
     }
     Component {
         name: "FacebookContent"
-        defaultProperty: "data"
-        prototype: "QQuickItem"
+        defaultProperty: "qmlAttachments"
+        prototype: "DefaultContent"
         exports: ["FacebookContent 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "text"; type: "string" }
         Property { name: "link"; type: "QUrl" }
         Property { name: "attachScreenshot"; type: "bool" }
+        Property { name: "appCredentials"; type: "FBAppCredentials"; isPointer: true }
     }
     Component {
-        name: "MicroblogContent"
-        defaultProperty: "data"
-        prototype: "QQuickItem"
-        exports: ["MicroblogContent 1.0"]
+        name: "GraphObjectProperty"
+        prototype: "QObject"
+        exports: ["GraphObjectProperty 1.0"]
         exportMetaObjectRevisions: [0]
-        Property { name: "text"; type: "string" }
-        Property { name: "attachScreenshot"; type: "bool" }
+        Property { name: "name"; type: "string" }
+        Property { name: "value"; type: "QVariant" }
+        Signal {
+            name: "nameChanged"
+            Parameter { name: "newName"; type: "string" }
+        }
+        Signal {
+            name: "valueChanged"
+            Parameter { name: "newValue"; type: "QVariant" }
+        }
+    }
+    Component {
+        name: "GraphObjectRef"
+        prototype: "QObject"
+        exports: ["GraphObjectRef 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "url"; type: "QUrl" }
+        Signal {
+            name: "urlChanged"
+            Parameter { name: "newUrl"; type: "QUrl" }
+        }
+    }
+    Component {
+        name: "ImageItem"
+        prototype: "ShareableImageItem"
+        exports: ["ImageItem 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "source"; type: "QUrl" }
+        Signal {
+            name: "sourceChanged"
+            Parameter { name: "newSource"; type: "QUrl" }
+        }
+    }
+    Component {
+        name: "OpenGraphAction"
+        prototype: "QObject"
+        exports: ["OpenGraphAction 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "type"; type: "string" }
+        Property { name: "additionalProperties"; type: "QVariantMap" }
+        Property { name: "publishProperties"; type: "QStringList" }
+        Signal {
+            name: "actionChanged"
+            Parameter { name: "action"; type: "OpenGraphAction"; isPointer: true }
+        }
+    }
+    Component {
+        name: "OpenGraphObject"
+        defaultProperty: "properties"
+        prototype: "QObject"
+        exports: ["OpenGraphObject 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "type"; type: "string" }
+        Property { name: "additionalProperties"; type: "QVariantMap" }
+        Signal {
+            name: "objectChanged"
+            Parameter { name: "object"; type: "OpenGraphObject"; isPointer: true }
+        }
+    }
+    Component {
+        name: "OpenGraphStory"
+        prototype: "ShareableItem"
+        exports: ["OpenGraphStory 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "action"; type: "OpenGraphAction"; isPointer: true }
+        Property { name: "previewPropertyName"; type: "string" }
+        Signal {
+            name: "actionChanged"
+            Parameter { name: "newAction"; type: "OpenGraphAction"; isPointer: true }
+        }
+        Signal {
+            name: "previewPropertyNameChanged"
+            Parameter { name: "newName"; type: "string" }
+        }
     }
     Component {
         name: "QtSharingKitApi"
@@ -50,27 +131,66 @@ Module {
         prototype: "QQuickItem"
         exports: ["SharingKitView 1.0"]
         exportMetaObjectRevisions: [0]
-        Property { name: "facebookAppCredentials"; type: "FBAppCredentials"; isPointer: true }
         Property { name: "title"; type: "string" }
+        Signal { name: "sharingFinished" }
         Method { name: "launchShareActivity" }
     }
     Component {
+        name: "ScreenShotItem"
+        prototype: "ShareableImageItem"
+        exports: ["ScreenShotItem 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "item"; type: "QQuickItem"; isPointer: true }
+        Property { name: "ready"; type: "bool"; isReadonly: true }
+        Method { name: "capture" }
+        Method {
+            name: "saveToFile"
+            type: "bool"
+            Parameter { name: "file"; type: "string" }
+        }
+    }
+    Component {
+        name: "ShareableImageItem"
+        prototype: "ShareableItem"
+        exports: ["ShareableImageItem 1.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+        Property { name: "url"; type: "QUrl"; isReadonly: true }
+        Signal {
+            name: "urlChanged"
+            Parameter { name: "newUrl"; type: "QUrl" }
+        }
+    }
+    Component {
+        name: "ShareableItem"
+        prototype: "QObject"
+        exports: ["ShareableItem 1.0"]
+        isCreatable: false
+        exportMetaObjectRevisions: [0]
+    }
+    Component {
         name: "SmsContent"
-        defaultProperty: "data"
-        prototype: "QQuickItem"
+        defaultProperty: "qmlAttachments"
+        prototype: "DefaultContent"
         exports: ["SmsContent 1.0"]
         exportMetaObjectRevisions: [0]
         Property { name: "body"; type: "string" }
         Property { name: "attachScreenshot"; type: "bool" }
     }
     Component {
-        name: "UrlShortener"
-        defaultProperty: "data"
-        prototype: "QQuickItem"
-        exports: ["UrlShortener 1.0"]
+        name: "TextItem"
+        prototype: "ShareableItem"
+        exports: ["TextItem 1.0"]
         exportMetaObjectRevisions: [0]
-        Property { name: "ready"; type: "bool"; isReadonly: true }
-        Property { name: "shortUrl"; type: "QUrl"; isReadonly: true }
-        Property { name: "longUrl"; type: "QUrl" }
+        Property { name: "text"; type: "string" }
+    }
+    Component {
+        name: "TwitterContent"
+        defaultProperty: "qmlAttachments"
+        prototype: "DefaultContent"
+        exports: ["TwitterContent 1.0"]
+        exportMetaObjectRevisions: [0]
+        Property { name: "text"; type: "string" }
+        Property { name: "attachScreenshot"; type: "bool" }
     }
 }
